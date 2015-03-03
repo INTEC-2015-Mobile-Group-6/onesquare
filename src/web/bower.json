@@ -1,0 +1,27 @@
+{
+  "name": "onesquare",
+  "main": "index.js",
+  "version": "0.0.0",
+  "homepage": "https://github.com/INTEC-2015-Mobile-Group-6/onesquare",
+  "authors": [
+    "Francis Brito <fr.br94@gmail.com>"
+  ],
+  "description": "Like Foursquare but simpler.",
+  "keywords": [
+    "onesquare",
+    "square",
+    "places",
+    "place",
+    "check",
+    "check-in"
+  ],
+  "license": "ISC",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
