@@ -22,6 +22,7 @@
         <link rel="import" href="/bower_components/paper-icon-button/paper-icon-button.html">
         <link rel="import" href="/bower_components/core-animated-pages/core-animated-pages.html">
         <link rel="import" href="/bower_components/core-animated-pages/transitions/slide-from-right.html">
+        <link rel="import" href="/bower_components/paper-tabs/paper-tabs.html">
         <!-- Fonts -->
         <link rel="import" href="/bower_components/font-roboto/roboto.html">
         <style>
@@ -97,6 +98,15 @@
                 right: 1rem;
                 bottom: 1rem;
             }
+
+            paper-tabs
+            {
+            font-family: 'RobotoDraft', sans-serif;
+            font-weight: 400;
+            background-color: #03a9f4;
+            color: #fff
+            }
+
         </style>
     </head>
     <body unresolved fullbleed>
@@ -117,7 +127,12 @@
                             </paper-item>
                         </core-menu>
                     </core-header-panel>
-                    <div tool>Places</div>
+                        <span tool>Places</span>
+                        <paper-tabs selected="0" noink>
+                            <paper-tab> Sites</paper-tab>
+                        <paper-tab> Favorites</paper-tab>
+                    </paper-tabs>
+                </div>
                     <div class="check-in-list">
                         <paper-shadow>
                             <article class="check-in" layout horizontal="">
