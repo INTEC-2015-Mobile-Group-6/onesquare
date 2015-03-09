@@ -1,0 +1,52 @@
+<link rel="import" href="/bower_components/polymer/polymer.html">
+<link rel="import" href="/bower_components/paper-shadow/paper-shadow.html">
+<link rel="import" href="/bower_components/paper-icon-button/paper-icon-button.html">
+
+<polymer-element name="check-in" attributes="date placeName isFavorite">
+    <template>
+        <style>
+            :host {
+                display: block;
+            }
+
+            .check-in {
+                padding: 1em;
+                min-height: 45px;
+                margin-bottom: 0.5em;
+                background-color: #fff;
+            }
+
+            .check-in .name {
+                margin: 0;
+            }
+
+            .check-in .date {
+                color: #727272;
+            }
+        </style>
+        <paper-shadow>
+            <article class="check-in" layout horizontal>
+                <section flex>
+                    <h3 class="place-name">{{name}}</h3>
+                    <span class="date">{{date}}</span>
+                </section>
+                <section>
+                    <template if="{{isFavorite}}">
+                        <paper-icon-button icon="star" noink></paper-icon-button>
+                    </template>
+                    <template if="{{!isFavorite}}">
+                        <paper-icon-button icon="star-outline" noink></paper-icon-button>
+                    </template>
+                </section>
+            </article>
+        </paper-shadow>
+    </template>
+    <script>
+        'use strict';
+
+        Polymer('check-in', {
+            date: Date.now(),
+            isFavorite: false
+        });
+    </script>
+</polymer-element>
