@@ -40,6 +40,7 @@
     "paper-icon-button": "Polymer/paper-icon-button#~0.5.5",
     "core-animated-pages": "Polymer/core-animated-pages#~0.5.5",
     "font-roboto": "Polymer/font-roboto#~0.5.5",
-    "paper-tabs": "Polymer/paper-tabs#~0.5.5"
+    "paper-tabs": "Polymer/paper-tabs#~0.5.5",
+    "momentjs": "~2.9.0"
   }
 }
