@@ -102,11 +102,26 @@
     <script>
         'use strict';
 
+        // NOTE: Change this flag to have the splashscreen shown.
+        var ENV = 'dev';
+
         Polymer('onesquare-app', {
             items: [],
             activeView: 'checkInListView',
+            created: function () {
+                var timeout = 5 * 1000;
+
+                if (ENV === 'dev') {
+                    timeout = 0;
+                }
+
+                var self = this;
+                setTimeout(function () {
+                    self.$.splashScreenNavigator.selectNext();
+                }, timeout);
+            },
             navigateTo: function (pageName) {
-                this.$.viewNavigator.selected = pageName;
+                this.activeView = pageName;
             }
         });
     </script>
