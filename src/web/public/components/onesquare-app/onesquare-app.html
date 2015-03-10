@@ -19,7 +19,9 @@
                 height: 100%;
             }
 
-
+            .view-navigator > .view {
+                padding: 1em;
+            }
         </style>
         <check-in-list items="{{items}}"></check-in-list>
         <core-animated-pages layout vertical>
@@ -47,7 +49,7 @@
                     </core-menu>
                 </core-header-panel>
                 <span tool>Check-in list</span>
-                <core-animated-pages>
+                <core-animated-pages class="view-navigator">
                     <!-- @view Check in list screen -->
                     <section class="view checkin-list-view" layout vertical>
                         <template if="{{items.length === 0}}">
