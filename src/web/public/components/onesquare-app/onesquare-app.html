@@ -18,6 +18,8 @@
             core-animated-pages {
                 height: 100%;
             }
+
+
         </style>
         <check-in-list items="{{items}}"></check-in-list>
         <core-animated-pages layout vertical>
@@ -45,22 +47,25 @@
                     </core-menu>
                 </core-header-panel>
                 <span tool>Check-in list</span>
-                <!-- @view Check in list screen -->
-                <section class="view checkin-list-view" layout horizontal>
-                    <template if="{{!items}}">
-                        <h3>There are no items in this list.</h3>
-                        <p>To add one, please click the top-right menu.</p>
-                    </template>
-                    <template repeat="{{ci in items}}" if="{{items}}">
-                        <check-in checkIn="{{ci}}"></check-in>
-                    </template>
-                </section>
-                <!-- @view Check in details screen -->
-                <section class="view checkin-detail-view" layout horizontal>
-                </section>
-                <!-- @view Add check in screen -->
-                <section class="view add-checkin-view" layout horizontal>
-                </section>
+                <core-animated-pages>
+                    <!-- @view Check in list screen -->
+                    <section class="view checkin-list-view" layout horizontal>
+                        <template if="{{!items}}">
+                            <h3>There are no items in this list.</h3>
+                            <p>To add one, please click the top-right menu.</p>
+                        </template>
+                        <template repeat="{{ci in items}}" if="{{items}}">
+                            <check-in checkIn="{{ci}}"></check-in>
+                        </template>
+                    </section>
+                    <!-- @view Check in details screen -->
+                    <section class="view checkin-detail-view" layout horizontal>
+                    </section>
+                    <!-- @view Add check in screen -->
+                    <section class="view add-checkin-view" layout horizontal>
+                    </section>
+                </core-animated-pages>
+
             </core-scaffold>
         </core-animated-pages>
     </template>
