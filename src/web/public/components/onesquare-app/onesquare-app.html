@@ -50,7 +50,7 @@
                 <core-animated-pages>
                     <!-- @view Check in list screen -->
                     <section class="view checkin-list-view" layout horizontal>
-                        <template if="{{!items}}">
+                        <template if="{{items.length === 0}}">
                             <h3>There are no items in this list.</h3>
                             <p>To add one, please click the top-right menu.</p>
                         </template>
@@ -65,7 +65,6 @@
                     <section class="view add-checkin-view" layout horizontal>
                     </section>
                 </core-animated-pages>
-
             </core-scaffold>
         </core-animated-pages>
     </template>
