@@ -11,37 +11,50 @@
     <template>
         <style>
             :host {
+                height: 100%;
                 display: block;
             }
 
-            core-animated-pages > content {
-                width: 100%;
+            core-animated-pages {
                 height: 100%;
             }
         </style>
-        <core-scaffold>
-            <core-header-panel navigation flex>
-                <core-toolbar>Menu</core-toolbar>
-                <core-menu>
-                    <paper-item noink>
-                        <core-icon icon="add"></core-icon>
-                        <a href="#add-checkin">Add check-in</a>
-                    </paper-item>
-                    <paper-item noink>
-                        <core-icon icon="bookmark"></core-icon>
-                        <a href="#checkin-reminders">Check-in reminders</a>
-                    </paper-item>
-                    <paper-item noink>
-                        <core-icon icon="close"></core-icon>
-                        <a href="#exit">Exit</a>
-                    </paper-item>
-                </core-menu>
-            </core-header-panel>
-            <span tool>Check-in list</span>
-            <core-animated-pages>
-                <content></content>
-            </core-animated-pages>
-        </core-scaffold>
+        <core-animated-pages layout vertical>
+            <!-- NOTE: `@view` tags annotate a element as a view. They are for clarification purpose only. They don't mean anything to Polymer nor are required by it. -->
+            <!-- @view Splash screen -->
+            <section class="view splash-view" layout vertical center-center>
+                <core-image src="/images/logo.png"></core-image>
+            </section>
+            <!-- @view Check in list screen -->
+            <section class="view checkin-list-view" layout horizontal>
+            </section>
+            <!-- @view Check in details screen -->
+            <section class="view checkin-detail-view" layout horizontal>
+            </section>
+            <!-- @view Add check in screen -->
+            <section class="view add-checkin-view" layout horizontal>
+            </section>
+        </core-animated-pages>
+        <!-- <core&#45;scaffold> -->
+        <!--     <core&#45;header&#45;panel navigation flex> -->
+        <!--         <core&#45;toolbar>Menu</core&#45;toolbar> -->
+        <!--         <core&#45;menu> -->
+        <!--             <paper&#45;item noink> -->
+        <!--                 <core&#45;icon icon="add"></core&#45;icon> -->
+        <!--                 <a href="#add&#45;checkin">Add check&#45;in</a> -->
+        <!--             </paper&#45;item> -->
+        <!--             <paper&#45;item noink> -->
+        <!--                 <core&#45;icon icon="bookmark"></core&#45;icon> -->
+        <!--                 <a href="#checkin&#45;reminders">Check&#45;in reminders</a> -->
+        <!--             </paper&#45;item> -->
+        <!--             <paper&#45;item noink> -->
+        <!--                 <core&#45;icon icon="close"></core&#45;icon> -->
+        <!--                 <a href="#exit">Exit</a> -->
+        <!--             </paper&#45;item> -->
+        <!--         </core&#45;menu> -->
+        <!--     </core&#45;header&#45;panel> -->
+        <!--     <span tool>Check&#45;in list</span> -->
+        <!-- </core&#45;scaffold> -->
     </template>
     <script>
         'use strict';
