@@ -6,6 +6,7 @@
 <link rel="import" href="/bower_components/paper-item/paper-item.html">
 <link rel="import" href="/bower_components/core-icon/core-icon.html">
 <link rel="import" href="/bower_components/core-animated-pages/core-animated-pages.html">
+<link rel="import" href="/bower_components/core-animated-pages/transitions/slide-from-right.html">
 <link rel="import" href="/bower_components/core-image/core-image.html">
 <link rel="import" href="/bower_components/core-item/core-item.html">
 <link rel="import" href="/bower_components/paper-input/paper-input.html">
@@ -35,7 +36,7 @@
             }
         </style>
         <check-in-list items="{{items}}"></check-in-list>
-        <core-animated-pages layout vertical>
+        <core-animated-pages  id="splashScreenNavigator" layout vertical transitions="slide-from-right">
             <!-- NOTE: `@view` tags annotate a element as a view. They are for clarification purpose only. They don't mean anything to Polymer nor are required by it. -->
             <!-- @view Splash screen -->
             <section class="view splash-view" layout vertical center-center>
@@ -50,7 +51,7 @@
                         <core-item id="closeButton" label="Exit" icon="close"></core-item>
                 </core-header-panel>
                 <span tool>Check-in list</span>
-                <core-animated-pages id="viewNavigator" class="view-navigator" selected="{{activeView}}">
+                <core-animated-pages id="viewNavigator" class="view-navigator" selected="{{activeView}}" transitions="slide-from-right">
                     <!-- @view Check in list screen -->
                     <section name="checkInListView" class="view checkin-list-view" layout vertical>
                         <template if="{{items.length === 0}}">
