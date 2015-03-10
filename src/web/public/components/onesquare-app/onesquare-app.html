@@ -7,6 +7,16 @@
 <link rel="import" href="/bower_components/core-icon/core-icon.html">
 <link rel="import" href="/bower_components/core-animated-pages/core-animated-pages.html">
 <link rel="import" href="/bower_components/core-image/core-image.html">
+<link rel="import" href="/bower_components/core-item/core-item.html">
+<link rel="import" href="/bower_components/paper-input/paper-input.html">
+<link rel="import" href="/bower_components/paper-checkbox/paper-checkbox.html">
+<link rel="import" href="/bower_components/ajax-form/ajax-form.html">
+<link rel="import" href="/bower_components/paper-button/paper-button.html">
+<link rel="import" href="/bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="/bower_components/paper-dropdown/paper-dropdown.html">
+<link rel="import" href="/bower_components/core-dropdown-menu/core-dropdown-menu.html">
+<link rel="import" href="/bower_components/core-dropdown/core-dropdown.html">
+<link rel="import" href="/bower_components/core-selector/core-selector.html">
 
 <polymer-element name="onesquare-app">
     <template>
@@ -31,28 +41,18 @@
             <section class="view splash-view" layout vertical center-center>
                 <core-image src="/images/logo.png"></core-image>
             </section>
-            <core-scaffold>
+            <core-scaffold layout vertical flex>
                 <core-header-panel navigation flex>
                     <core-toolbar>Menu</core-toolbar>
-                    <core-menu>
-                        <paper-item noink>
-                            <core-icon icon="add"></core-icon>
-                            <a href="#add-checkin">Add check-in</a>
-                        </paper-item>
-                        <paper-item noink>
-                            <core-icon icon="bookmark"></core-icon>
-                            <a href="#checkin-reminders">Check-in reminders</a>
-                        </paper-item>
-                        <paper-item noink>
-                            <core-icon icon="close"></core-icon>
-                            <a href="#exit">Exit</a>
-                        </paper-item>
-                    </core-menu>
+                    <core-menu valueattr="navigate-to" selected="{{activeView}}">
+                        <core-item navigate-to="addCheckInView" label="Add check-in" icon="add"></core-item>
+                        <core-item navigate-to="addCheckInReminderView" label="Add check-in reminder" icon="bookmark"></core-item>
+                        <core-item id="closeButton" label="Exit" icon="close"></core-item>
                 </core-header-panel>
                 <span tool>Check-in list</span>
-                <core-animated-pages class="view-navigator">
+                <core-animated-pages id="viewNavigator" class="view-navigator" selected="{{activeView}}">
                     <!-- @view Check in list screen -->
-                    <section class="view checkin-list-view" layout vertical>
+                    <section name="checkInListView" class="view checkin-list-view" layout vertical>
                         <template if="{{items.length === 0}}">
                             <h3>There are no items in this list.</h3>
                             <p>To add one, please click the top-right menu.</p>
@@ -62,10 +62,37 @@
                         </template>
                     </section>
                     <!-- @view Check in details screen -->
-                    <section class="view checkin-detail-view" layout horizontal>
+                    <section name="checkInDetailView" class="view checkin-detail-view" layout horizontal flex>
                     </section>
                     <!-- @view Add check in screen -->
-                    <section class="view add-checkin-view" layout horizontal>
+                    <section name="addCheckInView" class="view add-checkin-view" layout horizontal flex>
+                        <ajax-form id="addCheckInForm" flex>
+                            <fieldset layout vertical>
+                                <legend>Add check-in</legend>
+                                <paper-input label="Date" flex></paper-input>
+                                <paper-dropdown-menu label="Choose a country">
+                                    <paper-dropdown class="dropdown">
+                                        <core-menu class="menu">
+                                            <paper-item>Dominican Republic</paper-item>
+                                            <paper-item>United States</paper-item>
+                                            <paper-item>France</paper-item>
+                                            <paper-item>Russia</paper-item>
+                                        </core-menu>
+                                </paper-dropdown-menu>
+                                <paper-input label="Place" flex></paper-input>
+                                <paper-input label="Establishment" flex></paper-input>
+                                <paper-input label="Web site" flex></paper-input>
+                                <paper-input label="Photo URL" flex></paper-input>
+                                <div flex>
+                                    <label>Remember me?</label>
+                                    <paper-checkbox></paper-checkbox>
+                                </div>
+                                <div layout horizontal justified flex>
+                                    <paper-button id="clearButton">Clear</paper-button>
+                                    <paper-button id="submitButton">Submit</paper-button>
+                                </div>
+                            </fieldset>
+                        </ajax-form>
                     </section>
                 </core-animated-pages>
             </core-scaffold>
@@ -75,7 +102,11 @@
         'use strict';
 
         Polymer('onesquare-app', {
-            items: []
+            items: [],
+            activeView: 'checkInListView',
+            navigateTo: function (pageName) {
+                this.$.viewNavigator.selected = pageName;
+            }
         });
     </script>
 </polymer-element>
