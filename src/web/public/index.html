@@ -9,10 +9,25 @@
         <!-- Polymer -->
         <link rel="import" href="/bower_components/polymer/polymer.html">
         <!-- Components -->
+        <link rel="import" href="/bower_components/core-image/core-image.html">
         <!-- Custom Components -->
+        <link rel="import" href="/components/onesquare-app/onesquare-app.html">
         <!-- Fonts -->
         <link rel="import" href="/bower_components/font-roboto/roboto.html">
+        <style>
+            body {
+                font-family: "RobotoDraft";
+                font-weight: 300;
+            }
+        </style>
     </head>
     <body unresolved fullbleed>
+        <onesquare-app>
+            <!-- NOTE: First element under `onesquare-app` is considered a splash screen.  -->
+            <!-- @view Splash screen -->
+            <section class="view splash-view" layout vertical center-center>
+                <core-image src="/images/logo.png"></core-image>
+            </section>
+        </onesquare-app>
     </body>
 </html>
