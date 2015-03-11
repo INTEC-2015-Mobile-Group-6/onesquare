@@ -157,12 +157,12 @@
                 }
             },
             clean: function(){
-                this.$.date.value === " ";
-                this.$.country.value === " ";
-                this.$.place.value ===" ";
-                this.$.establishment.value === " ";
-                this.$.website.value === " ";
-                this.$.weburl.value === " ";
+                this.$.date.value = " ";
+                this.$.country.value = " ";
+                this.$.place.value =" ";
+                this.$.establishment.value = " ";
+                this.$.website.value = " ";
+                this.$.weburl.value = " ";
             },
             exit: function () {
 
@@ -171,7 +171,7 @@
                 this.activeView = pageName;
             },
             clearForm: function () {
-                // TODO: Clear fields.
+                this.clean();
             },
             submitForm: function () {
                 // TODO: Validate form. Add new check-in. Store check-in. 
