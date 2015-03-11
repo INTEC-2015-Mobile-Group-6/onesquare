@@ -19,6 +19,7 @@
 <link rel="import" href="/bower_components/core-dropdown/core-dropdown.html">
 <link rel="import" href="/bower_components/core-selector/core-selector.html">
 <link rel="import" href="/components/check-in-list/check-in-list.html">
+<link rel="import" href="/components/check-in-detail/check-in-detail.html">
 
 <polymer-element name="onesquare-app">
     <template>
@@ -56,10 +57,11 @@
                 <core-animated-pages id="viewNavigator" class="view-navigator" selected="{{activeView}}" transitions="slide-from-right">
                     <!-- @view Check in list screen -->
                     <section name="checkInListView" class="view checkin-list-view" layout vertical>
-                        <check-in-list items="{{items}}"></check-in-list>
+                        <check-in-list items="{{items}}" selectedItem="{{selectedItem}}" on-tap="{{navigateToDetailView}}"></check-in-list>
                     </section>
                     <!-- @view Check in details screen -->
                     <section name="checkInDetailView" class="view checkin-detail-view" layout horizontal flex>
+                        <check-in-detail checkIn="{{selectedItem}}" layout vertical flex></check-in-detail>
                     </section>
                     <!-- @view Add check in screen -->
                     <section name="addCheckInView" class="view add-checkin-view" layout horizontal flex>
@@ -102,25 +104,39 @@
         var ENV = 'prod';
 
         Polymer('onesquare-app', {
+            selectedItem: {},
             items: [{
                 placeName: 'Chef Pepper',
                 date: new Date('02/11/2015'),
-                isFavorite: false
+                isFavorite: false,
+                country: 'Dominican Republic',
+                website: 'http://localhost:3000/',
+                imageUrl: 'http://placeholder.com/400'
             },
             {
                 placeName: 'Jardín Botánico',
                 date: new Date('03/11/2015'),
-                isFavorite: false
+                isFavorite: false,
+                country: 'Dominican Republic',
+                website: 'http://localhost:3000/',
+                imageUrl: 'http://placeholder.com/400'
             },
             {
                 placeName: 'Agora Mall',
                 date: new Date('01/11/2015'),
-                isFavorite: true
+                isFavorite: true,
+                country: 'Dominican Republic',
+                website: 'http://localhost:3000/',
+                imageUrl: 'http://placeholder.com/400'
+
             },
             {
                 placeName: 'Ikea',
                 date: new Date('03/11/2015 16:30:15'),
-                isFavorite: true
+                isFavorite: true,
+                country: 'Dominican Republic',
+                website: 'http://localhost:3000/',
+                imageUrl: 'http://placeholder.com/400'
             }],
             activeView: 'checkInListView',
             created: function () {
@@ -174,6 +190,10 @@
             submitForm: function () {
                 // TODO: Validate form. Add new check-in. Store check-in. 
                 this.navigateTo('checkInListView');
+            },
+            navigateToDetailView: function () {
+                console.log(this.selectedItem);
+                this.navigateTo('checkInDetailView');
             }
         });
     </script>
