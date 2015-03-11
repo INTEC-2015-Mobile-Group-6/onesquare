@@ -1,6 +1,7 @@
 <link rel="import" href="/bower_components/polymer/polymer.html">
 <link rel="import" href="/bower_components/core-localstorage/core-localstorage.html">
 <link rel="import" href="/components/check-in/check-in.html">
+<script src="/bower_components/underscore/underscore.js"></script>
 
 <polymer-element name="check-in-list" attributes="items">
     <template>
@@ -9,8 +10,8 @@
             <h3>There are no items in this list.</h3>
             <p>To add one, please click the top-right menu.</p>
         </template>
-        <template if="{{items.length}}" repeat="{{i in items}}">
-            <check-in checkIn="{{i}}"></check-in>
+        <template if="{{items.length}}" repeat="{{i in sortedItems()}}">
+            <check-in placeName="{{i.placeName}}" date="{{i.date}}" isFavorite="{{i.isFavorite}}"></check-in>
         </template>
     </template>
     <script>
@@ -18,6 +19,9 @@
 
         Polymer('check-in-list', {
             items: [],
+            sortedItems: function () {
+                return _.sortBy(this.items, 'date').reverse();
+            },
             addCheckIn: function (checkIn) {
                 this.items.push(checkIn);
             }
