@@ -85,8 +85,8 @@
                                     <paper-checkbox></paper-checkbox>
                                 </div>
                                 <div layout horizontal justified flex>
-                                    <paper-button id="clearButton" on-tab="clear" >Clear</paper-button>
-                                    <paper-button id="submitButton" on-tab="validate">Submit</paper-button>
+                                    <paper-button id="clearButton" on-tap="{{clearForm}}" >Clear</paper-button>
+                                    <paper-button id="submitButton" on-tap="{{submitForm}}">Submit</paper-button>
                                 </div>
                             </fieldset>
                         </ajax-form>
@@ -175,6 +175,7 @@
             },
             submitForm: function () {
                 // TODO: Validate form. Add new check-in. Store check-in. 
+                this.navigateTo('checkInListView');
             }
         });
     </script>
