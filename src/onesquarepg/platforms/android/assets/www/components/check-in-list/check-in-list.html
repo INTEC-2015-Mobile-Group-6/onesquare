@@ -1,0 +1,14 @@
+<link rel="import" href="/bower_components/polymer/polymer.html">
+
+<polymer-element name="check-in-list" attributes="items">
+    <template>
+        <template if="{{items}}"></template>
+    </template>
+    <script>
+        'use strict';
+
+        Polymer('check-in-list', {
+            items: []
+        });
+    </script>
+</polymer-element>
