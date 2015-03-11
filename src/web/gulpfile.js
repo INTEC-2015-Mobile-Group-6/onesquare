@@ -1,9 +1,7 @@
 var gulp = require('gulp'),
     vulcanize = require('gulp-vulcanize');
 
-gulp.task('default', function () {
-    console.log('it works!');
-});
+gulp.task('default', ['bundle']);
 
 gulp.task('bundle', function () {
     return gulp.src('./public/index.html')
