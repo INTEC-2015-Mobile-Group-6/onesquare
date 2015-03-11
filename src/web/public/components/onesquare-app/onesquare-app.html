@@ -50,7 +50,7 @@
                     <core-menu valueattr="navigate-to" selected="{{activeView}}">
                         <core-item navigate-to="addCheckInView" label="Add check-in" icon="add"></core-item>
                         <core-item navigate-to="addCheckInReminderView" label="Add check-in reminder" icon="bookmark"></core-item>
-                        <core-item id="closeButton" label="Exit" icon="close" on-tab="{{exit}}"></core-item>
+                        <core-item navigate-to="exitView" id="closeButton" label="Exit" icon="close" on-tap="{{exit}}"></core-item>
                 </core-header-panel>
                 <span tool>Check-in list</span>
                 <core-animated-pages id="viewNavigator" class="view-navigator" selected="{{activeView}}" transitions="slide-from-right">
@@ -124,11 +124,6 @@
             }],
             activeView: 'checkInListView',
             created: function () {
-                // Check if running on phonegap
-                if (navigator.app) {
-                    navigator.app.exitApp();
-                }
-
                 var timeout = 5 * 1000;
 
                 if (ENV === 'dev') {
@@ -165,7 +160,10 @@
                 this.$.weburl.value = " ";
             },
             exit: function () {
-
+                // Check if running on phonegap
+                if (navigator.app) {
+                    navigator.app.exitApp();
+                }
             },
             navigateTo: function (pageName) {
                 this.activeView = pageName;
