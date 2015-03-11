@@ -9,7 +9,8 @@ gulp.task('bundle', function () {
     return gulp.src('./public/index.html')
         .pipe(vulcanize({
             dest: './dist',
-            strip: true
+            strip: true,
+            abspath: './public'
         }))
         .pipe(gulp.dest('./dist'));
 });
