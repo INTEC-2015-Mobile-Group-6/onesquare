@@ -109,7 +109,7 @@
             },
             {
                 name: 'Jardín Botánico',
-                date: new Date(''),
+                date: new Date('03/11/2015'),
                 isFavorite: false
             }],
             activeView: 'checkInListView',
@@ -117,6 +117,12 @@
                 // Check if running on phonegap
                 if (navigator.app) {
                     navigator.app.exitApp();
+                }
+
+                var timeout = 5 * 1000;
+
+                if (ENV === 'dev') {
+                    timeout = 0;
                 }
 
                 var self = this;
@@ -147,8 +153,7 @@
                 this.$.establishment.value === " ";
                 this.$.website.value === " ";
                 this.$.weburl.value === " ";
-            }
-
+            },
             exit: function () {
 
             },
