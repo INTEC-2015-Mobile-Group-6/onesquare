@@ -1,14 +1,26 @@
 <link rel="import" href="/bower_components/polymer/polymer.html">
+<link rel="import" href="/bower_components/core-localstorage/core-localstorage.html">
+<link rel="import" href="/components/check-in/check-in.html">
 
 <polymer-element name="check-in-list" attributes="items">
     <template>
-        <template if="{{items}}"></template>
+        <core-localstorage name="onesquare-app" value="{{items}}"></core-localstorage>
+        <template if="{{items.length === 0}}">
+            <h3>There are no items in this list.</h3>
+            <p>To add one, please click the top-right menu.</p>
+        </template>
+        <template if="{{items.length}}" repeat="{{i in items}}">
+            <check-in checkIn="{{i}}"></check-in>
+        </template>
     </template>
     <script>
         'use strict';
 
         Polymer('check-in-list', {
-            items: []
+            items: [],
+            addCheckIn: function (checkIn) {
+                this.items.push(checkIn);
+            }
         });
     </script>
 </polymer-element>

@@ -18,6 +18,7 @@
 <link rel="import" href="/bower_components/core-dropdown-menu/core-dropdown-menu.html">
 <link rel="import" href="/bower_components/core-dropdown/core-dropdown.html">
 <link rel="import" href="/bower_components/core-selector/core-selector.html">
+<link rel="import" href="/components/check-in-list/check-in-list.html">
 
 <polymer-element name="onesquare-app">
     <template>
@@ -37,7 +38,6 @@
 
 
         </style>
-        <check-in-list items="{{items}}"></check-in-list>
         <core-animated-pages  id="splashScreenNavigator" layout vertical transitions="slide-from-right">
             <!-- NOTE: `@view` tags annotate a element as a view. They are for clarification purpose only. They don't mean anything to Polymer nor are required by it. -->
             <!-- @view Splash screen -->
@@ -56,13 +56,7 @@
                 <core-animated-pages id="viewNavigator" class="view-navigator" selected="{{activeView}}" transitions="slide-from-right">
                     <!-- @view Check in list screen -->
                     <section name="checkInListView" class="view checkin-list-view" layout vertical>
-                        <template if="{{items.length === 0}}">
-                            <h3>There are no items in this list.</h3>
-                            <p>To add one, please click the top-right menu.</p>
-                        </template>
-                        <template repeat="{{ci in items}}" if="{{items}}">
-                            <check-in checkIn="{{ci}}"></check-in>
-                        </template>
+                        <check-in-list items="{{items}}"></check-in-list>
                     </section>
                     <!-- @view Check in details screen -->
                     <section name="checkInDetailView" class="view checkin-detail-view" layout horizontal flex>
@@ -108,55 +102,65 @@
         var ENV = 'prod';
 
         Polymer('onesquare-app', {
-            items: [],
+            items: [{
+                name: 'Chef Pepper',
+                date: new Date('02/11/2015'),
+                isFavorite: false
+            },
+            {
+                name: 'Jardín Botánico',
+                date: new Date(''),
+                isFavorite: false
+            }],
             activeView: 'checkInListView',
-            `
-           validate: function() {
+            created: function () {
+                // Check if running on phonegap
+                if (navigator.app) {
+                    navigator.app.exitApp();
+                }
 
-            if (this.$.date.value != " "){
-                alert("Please complete all fields");
-            }
-            else
-                if (this.$.country.value != " ") {
+                var self = this;
+                setTimeout(function () {
+                    self.$.splashScreenNavigator.selectNext();
+                }, timeout);
+            },
+            validate: function() {
+                if (this.$.date.value != " "){
                     alert("Please complete all fields");
-             }
-            else
-                if (this.$.place.value !=" ") {
-                     alert("Please complete all fields");
-             }
-            else
-                if (this.$.establishment.value != " ") {
+                } else if (this.$.country.value != " ") {
                     alert("Please complete all fields");
-            }
-            else
-                if (this.$.website.value != " ") {
+                } else if (this.$.place.value !=" ") {
                     alert("Please complete all fields");
-            }
-            else
-                if (this.$.weburl.value != " ") {
+                } else if (this.$.establishment.value != " ") {
                     alert("Please complete all fields");
-            }
-
-           },
-
-           clean: function(){
-
+                } else if (this.$.website.value != " ") {
+                    alert("Please complete all fields");
+                }
+                else if (this.$.weburl.value != " ") {
+                    alert("Please complete all fields");
+                }
+            },
+            clean: function(){
                 this.$.date.value === " ";
                 this.$.country.value === " ";
                 this.$.place.value ===" ";
                 this.$.establishment.value === " ";
                 this.$.website.value === " ";
                 this.$.weburl.value === " ";
-            } 
-           }
-
-            exit: function () {
-                // Check if running on phonegap
-                if (navigator.app) {
-                    navigator.app.exitApp();
-                }
             }
 
+            exit: function () {
+
+            },
+            navigateTo: function (pageName) {
+                this.activeView = pageName;
+            },
+            clearForm: function () {
+                // TODO: Clear fields.
+            },
+            submitForm: function () {
+                // TODO: Validate form. Add new check-in. Store check-in. 
+            }
         });
     </script>
 </polymer-element>
