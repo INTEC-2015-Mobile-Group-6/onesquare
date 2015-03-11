@@ -68,7 +68,7 @@
                         <ajax-form id="addCheckInForm" flex>
                             <fieldset layout vertical>
                                 <legend>Add check-in</legend>
-                                <paper-input label="Date" id="date" flex></paper-input>
+                                <paper-input label="Date (MM-DD-YYYY)" id="date" flex></paper-input>
                                 <paper-dropdown-menu id= "country" label="Choose a country">
                                     <paper-dropdown class="dropdown">
                                         <core-menu class="menu">
@@ -84,7 +84,7 @@
                                 <paper-input label="Photo URL" id="weburl" flex></paper-input>
                                 <div flex>
                                     <label>Remember me?</label>
-                                    <paper-checkbox></paper-checkbox>
+                                    <paper-checkbox id="isFavorite"></paper-checkbox>
                                 </div>
                                 <div layout horizontal justified flex>
                                     <paper-button id="clearButton" on-tap="{{clearForm}}" >Clear</paper-button>
@@ -151,29 +151,13 @@
                     self.$.splashScreenNavigator.selectNext();
                 }, timeout);
             },
-            validate: function() {
-                if (this.$.date.value != " "){
-                    alert("Please complete all fields");
-                } else if (this.$.country.value != " ") {
-                    alert("Please complete all fields");
-                } else if (this.$.place.value !=" ") {
-                    alert("Please complete all fields");
-                } else if (this.$.establishment.value != " ") {
-                    alert("Please complete all fields");
-                } else if (this.$.website.value != " ") {
-                    alert("Please complete all fields");
-                }
-                else if (this.$.weburl.value != " ") {
-                    alert("Please complete all fields");
-                }
-            },
             clean: function(){
-                this.$.date.value = " ";
-                this.$.country.value = " ";
-                this.$.place.value =" ";
-                this.$.establishment.value = " ";
-                this.$.website.value = " ";
-                this.$.weburl.value = " ";
+                this.$.date.value = null;
+                this.$.country.value = null;
+                this.$.place.value = null;
+                this.$.establishment.value = null;
+                this.$.website.value = null;
+                this.$.weburl.value = null;
             },
             exit: function () {
                 // Check if running on phonegap
@@ -187,13 +171,44 @@
             clearForm: function () {
                 this.clean();
             },
-            submitForm: function () {
-                // TODO: Validate form. Add new check-in. Store check-in. 
-                this.navigateTo('checkInListView');
-            },
             navigateToDetailView: function () {
                 console.log(this.selectedItem);
                 this.navigateTo('checkInDetailView');
+            },
+            submitForm: function (e) {
+                // TODO: Validate form. Add new check-in. Store check-in.
+                if (!this.validateDate(this.$.date.value)) {
+                    return alert("Please enter a valid date");
+                };
+
+                if (this.$.country.value == " " || this.$.place.value ==" " || 
+                    this.$.establishment.value == " " || this.$.establishment.value == " " || this.$.website.value == " " || this.$.weburl.value == " "){
+
+                    alert("Please complete all fields");
+                    this.clean();
+                }
+
+                else{
+                    this.$.checkInList.addCheckIn({placeName: this.$.place.value, date: this.$.date.value, 
+                    isFavorite: this.$.isFavorite.checked});
+
+                    this.navigateTo('checkInListView');
+                }
+
+                e.preventDefault();
+            },
+            validateDate: function(date){
+                var matches = /^(\d{2})[-\/](\d{2})[-\/](\d{4})$/.exec(date);
+                if (matches == null) return false;
+                
+                var d = matches[2];
+                var m = matches[1] - 1;
+                var y = matches[3];
+
+                var composedDate = new Date(y, m, d);
+                return composedDate.getDate() == d &&
+                        composedDate.getMonth() == m &&
+                        composedDate.getFullYear() == y;
             }
         });
     </script>
