@@ -10,7 +10,8 @@ gulp.task('bundle', ['optimize-images'], function () {
         .pipe(vulcanize({
             dest: './dist',
             strip: true,
-            abspath: './public'
+            abspath: './public',
+            inline: true
         }))
         .pipe(gulp.dest('./dist'));
 });
