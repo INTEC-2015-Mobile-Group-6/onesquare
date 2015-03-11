@@ -3,7 +3,7 @@
 <link rel="import" href="/bower_components/paper-icon-button/paper-icon-button.html">
 <script src="/bower_components/momentjs/moment.js"></script>
 
-<polymer-element name="check-in" attributes="date placeName isFavorite">
+<polymer-element name="check-in" attributes="checkIn">
     <template>
         <style>
             :host {
@@ -28,14 +28,14 @@
         <paper-shadow>
             <article class="check-in" layout horizontal>
                 <section flex>
-                    <h3 class="place-name">{{placeName}}</h3>
+                    <h3 class="place-name">{{checkIn.placeName}}</h3>
                     <span class="date">{{dateFromNow()}}</span>
                 </section>
                 <section>
-                    <template if="{{isFavorite}}">
+                    <template if="{{checkIn.isFavorite}}">
                         <paper-icon-button icon="star" noink></paper-icon-button>
                     </template>
-                    <template if="{{!isFavorite}}">
+                    <template if="{{!checkIn.isFavorite}}">
                         <paper-icon-button icon="star-outline" noink></paper-icon-button>
                     </template>
                 </section>
@@ -46,10 +46,12 @@
         'use strict';
 
         Polymer('check-in', {
-            date: Date.now(),
-            isFavorite: false,
+            checkIn: {
+                date: Date.now(),
+                isFavorite: false
+            },
             dateFromNow: function () {
-                return moment(this.date).fromNow();
+                return moment(this.checkIn.date).fromNow();
             }
         });
     </script>

@@ -11,7 +11,7 @@
             <p>To add one, please click the top-right menu.</p>
         </template>
         <template if="{{items.length}}" repeat="{{i in sortedItems()}}">
-            <check-in placeName="{{i.placeName}}" date="{{i.date}}" isFavorite="{{i.isFavorite}}"></check-in>
+            <check-in checkIn="{{i}}"></check-in>
         </template>
     </template>
     <script>
