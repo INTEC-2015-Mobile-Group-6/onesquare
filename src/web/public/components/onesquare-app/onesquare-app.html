@@ -34,6 +34,8 @@
             .view-navigator > .view {
                 padding: 1em;
             }
+
+
         </style>
         <check-in-list items="{{items}}"></check-in-list>
         <core-animated-pages  id="splashScreenNavigator" layout vertical transitions="slide-from-right">
@@ -48,7 +50,7 @@
                     <core-menu valueattr="navigate-to" selected="{{activeView}}">
                         <core-item navigate-to="addCheckInView" label="Add check-in" icon="add"></core-item>
                         <core-item navigate-to="addCheckInReminderView" label="Add check-in reminder" icon="bookmark"></core-item>
-                        <core-item id="closeButton" label="Exit" icon="close"></core-item>
+                        <core-item id="closeButton" label="Exit" icon="close" on-tab="{{exit}}"></core-item>
                 </core-header-panel>
                 <span tool>Check-in list</span>
                 <core-animated-pages id="viewNavigator" class="view-navigator" selected="{{activeView}}" transitions="slide-from-right">
@@ -70,8 +72,8 @@
                         <ajax-form id="addCheckInForm" flex>
                             <fieldset layout vertical>
                                 <legend>Add check-in</legend>
-                                <paper-input label="Date" flex></paper-input>
-                                <paper-dropdown-menu label="Choose a country">
+                                <paper-input label="Date" id="date" flex></paper-input>
+                                <paper-dropdown-menu id= "country" label="Choose a country">
                                     <paper-dropdown class="dropdown">
                                         <core-menu class="menu">
                                             <paper-item>Dominican Republic</paper-item>
@@ -80,17 +82,17 @@
                                             <paper-item>Russia</paper-item>
                                         </core-menu>
                                 </paper-dropdown-menu>
-                                <paper-input label="Place" flex></paper-input>
-                                <paper-input label="Establishment" flex></paper-input>
-                                <paper-input label="Web site" flex></paper-input>
-                                <paper-input label="Photo URL" flex></paper-input>
+                                <paper-input label="Place" id="place"flex></paper-input>
+                                <paper-input label="Establishment" id="establishment"flex></paper-input>
+                                <paper-input label="Web site" id="website" flex></paper-input>
+                                <paper-input label="Photo URL" id="weburl" flex></paper-input>
                                 <div flex>
                                     <label>Remember me?</label>
                                     <paper-checkbox></paper-checkbox>
                                 </div>
                                 <div layout horizontal justified flex>
-                                    <paper-button id="clearButton">Clear</paper-button>
-                                    <paper-button id="submitButton">Submit</paper-button>
+                                    <paper-button id="clearButton" on-tab="clear" >Clear</paper-button>
+                                    <paper-button id="submitButton" on-tab="validate">Submit</paper-button>
                                 </div>
                             </fieldset>
                         </ajax-form>
@@ -103,26 +105,58 @@
         'use strict';
 
         // NOTE: Change this flag to have the splashscreen shown.
-        var ENV = 'dev';
+        var ENV = 'prod';
 
         Polymer('onesquare-app', {
             items: [],
             activeView: 'checkInListView',
-            created: function () {
-                var timeout = 5 * 1000;
+            `
+           validate: function() {
 
-                if (ENV === 'dev') {
-                    timeout = 0;
-                }
-
-                var self = this;
-                setTimeout(function () {
-                    self.$.splashScreenNavigator.selectNext();
-                }, timeout);
-            },
-            navigateTo: function (pageName) {
-                this.activeView = pageName;
+            if (this.$.date.value != " "){
+                alert("Please complete all fields");
             }
+            else
+                if (this.$.country.value != " ") {
+                    alert("Please complete all fields");
+             }
+            else
+                if (this.$.place.value !=" ") {
+                     alert("Please complete all fields");
+             }
+            else
+                if (this.$.establishment.value != " ") {
+                    alert("Please complete all fields");
+            }
+            else
+                if (this.$.website.value != " ") {
+                    alert("Please complete all fields");
+            }
+            else
+                if (this.$.weburl.value != " ") {
+                    alert("Please complete all fields");
+            }
+
+           },
+
+           clean: function(){
+
+                this.$.date.value === " ";
+                this.$.country.value === " ";
+                this.$.place.value ===" ";
+                this.$.establishment.value === " ";
+                this.$.website.value === " ";
+                this.$.weburl.value === " ";
+            } 
+           }
+
+            exit: function () {
+                // Check if running on phonegap
+                if (navigator.app) {
+                    navigator.app.exitApp();
+                }
+            }
+
         });
     </script>
 </polymer-element>
