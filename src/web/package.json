@@ -21,6 +21,7 @@
     "express": "^4.12.2"
   },
   "devDependencies": {
-    "gulp": "^3.8.11"
+    "gulp": "^3.8.11",
+    "gulp-vulcanize": "^5.0.0"
   }
 }
