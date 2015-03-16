@@ -42,7 +42,7 @@ gulp.task('inject', function () {
     ];
 
     return gulp.src(dir.assets + '/index.html')
-        .pipe(inject(gulp.src(sources, {read: false})))
-        .pipe(inject(gulp.src(bowerFiles(), {read: false}), {name: 'bower'}))
+        .pipe(inject(gulp.src(sources, {read: false}), {addRootSlash: false}))
+        .pipe(inject(gulp.src(bowerFiles(), {read: false}), {name: 'bower', addRootSlash: false}))
         .pipe(gulp.dest(dir.dist));
 });
