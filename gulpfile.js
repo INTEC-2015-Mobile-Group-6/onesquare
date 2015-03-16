@@ -18,7 +18,7 @@ var dir = {
     assets: path.join(__dirname, './public'),
 };
 
-gulp.task('default', ['build'], function () {
+gulp.task('default', ['inject', 'build'], function () {
     gutil.log('Building... This might take a while.');
 });
 
