@@ -306,3 +306,4 @@ FakesAssemblies/
 
 # Release directory.
 dist
+*.env
