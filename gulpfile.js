@@ -46,3 +46,12 @@ gulp.task('inject', function () {
         .pipe(inject(gulp.src(bowerFiles(), {read: false}), {name: 'bower', addRootSlash: false}))
         .pipe(gulp.dest(dir.dist));
 });
+
+gulp.task('copy', function () {
+    var sources = [
+        dir.assets + '/**'
+    ];
+
+    return gulp.src(sources)
+        .pipe(gulp.dest(dir.dist));
+});
