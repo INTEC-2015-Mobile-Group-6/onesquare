@@ -42,8 +42,8 @@ gulp.task('inject', ['copy'], function () {
     ];
 
     return gulp.src(dir.dist + '/index.html')
-        .pipe(inject(gulp.src(sources, {read: false}), {addRootSlash: false}))
-        .pipe(inject(gulp.src(bowerFiles(), {read: false}), {name: 'bower', addRootSlash: false}))
+        .pipe(inject(gulp.src(sources, {read: false}), {relative: true}))
+        .pipe(inject(gulp.src(bowerFiles(), {read: false}), {name: 'bower', relative: true}))
         .pipe(gulp.dest(dir.dist));
 });
 
