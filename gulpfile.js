@@ -16,6 +16,9 @@ var dir = {
     assets: path.join(__dirname, './public'),
 };
 
+gulp.task('default', ['build'], function () {
+    gutil.log('Building... This might take a while.');
+});
 
 gulp.task('build', function () {
     gulp.src(dir.assets + '/**')
