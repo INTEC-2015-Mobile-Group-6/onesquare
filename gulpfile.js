@@ -7,8 +7,10 @@ var pkg = require('./package.json'),
 
 var gulp = require('gulp'),
     gutil = require('gulp-util'),
+    inject = require('gulp-inject'),
     plumber = require('gulp-plumber'),
-    pgbuild = require('gulp-phonegap-build');
+    pgbuild = require('gulp-phonegap-build'),
+    bowerFiles = require('main-bower-files');
 
 var dir = {
     out: path.join(__dirname, './out'),
@@ -32,4 +34,15 @@ gulp.task('build', function () {
                 token: process.env.PG_BUILD_AUTH_TOKEN
             }
         }));
+});
+
+gulp.task('inject', function () {
+    var sources = [
+        dir.assets + '/lib/**/*.html'
+    ];
+
+    return gulp.src(dir.assets + '/index.html')
+        .pipe(inject(gulp.src(sources, {read: false})))
+        .pipe(inject(gulp.src(bowerFiles(), {read: false}), {name: 'bower'}))
+        .pipe(gulp.dest(dir.dist));
 });
