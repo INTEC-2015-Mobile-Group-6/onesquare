@@ -36,12 +36,12 @@ gulp.task('build', function () {
         }));
 });
 
-gulp.task('inject', function () {
+gulp.task('inject', ['copy'], function () {
     var sources = [
-        dir.assets + '/lib/**/*.html'
+        dir.dist + '/lib/**/*.html'
     ];
 
-    return gulp.src(dir.assets + '/index.html')
+    return gulp.src(dir.dist + '/index.html')
         .pipe(inject(gulp.src(sources, {read: false}), {addRootSlash: false}))
         .pipe(inject(gulp.src(bowerFiles(), {read: false}), {name: 'bower', addRootSlash: false}))
         .pipe(gulp.dest(dir.dist));
