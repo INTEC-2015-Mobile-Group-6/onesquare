@@ -10,7 +10,8 @@ var gulp = require('gulp'),
     inject = require('gulp-inject'),
     plumber = require('gulp-plumber'),
     pgbuild = require('gulp-phonegap-build'),
-    bowerFiles = require('main-bower-files');
+    bowerFiles = require('main-bower-files'),
+    livereload = require('gulp-livereload');
 
 var dir = {
     out: path.join(__dirname, './out'),
@@ -44,7 +45,8 @@ gulp.task('inject', ['copy'], function () {
     return gulp.src(dir.dist + '/index.html')
         .pipe(inject(gulp.src(sources, {read: false}), {relative: true}))
         .pipe(inject(gulp.src(bowerFiles(), {read: false}), {name: 'bower', relative: true}))
-        .pipe(gulp.dest(dir.dist));
+        .pipe(gulp.dest(dir.dist))
+        .pipe(livereload());
 });
 
 gulp.task('copy', function () {
@@ -54,4 +56,15 @@ gulp.task('copy', function () {
 
     return gulp.src(sources)
         .pipe(gulp.dest(dir.dist));
+});
+
+gulp.task('watch', function () {
+    var sources = [
+        dir.assets + '/index.html',
+        dir.assets + '/lib/**'
+    ];
+
+    livereload.listen();
+
+    return gulp.watch(sources, ['inject']);
 });
