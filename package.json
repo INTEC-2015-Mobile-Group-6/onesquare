@@ -1,0 +1,19 @@
+{
+  "name": "onesquare",
+  "version": "0.0.1",
+  "description": "Just another places app.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/francisbrito/onesquare.git"
+  },
+  "author": "Francis Brito <fr.br94@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/francisbrito/onesquare/issues"
+  },
+  "homepage": "https://github.com/francisbrito/onesquare"
+}
