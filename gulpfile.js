@@ -3,7 +3,9 @@
 require('dotenv').load();
 
 var pkg = require('./package.json'),
-    path = require('path');
+    path = require('path'),
+    http = require('http'),
+    ecstatic = require('ecstatic');
 
 var gulp = require('gulp'),
     gutil = require('gulp-util'),
@@ -65,6 +67,16 @@ gulp.task('watch', function () {
     ];
 
     livereload.listen();
-
+    
     return gulp.watch(sources, ['inject']);
+});
+
+gulp.task('serve', ['inject'], function () {
+    var port = process.env.NODE_PORT || 3000;
+
+    http.createServer(
+        ecstatic({root: dir.dist})
+    ).listen(port);
+
+    gutil.log('Listening at http://localhost:' + port);
 });
