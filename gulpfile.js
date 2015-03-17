@@ -13,7 +13,9 @@ var gulp = require('gulp'),
     plumber = require('gulp-plumber'),
     pgbuild = require('gulp-phonegap-build'),
     bowerFiles = require('main-bower-files'),
-    livereload = require('gulp-livereload');
+    livereload = require('gulp-livereload'),
+    vulcanize = require('gulp-vulcanize'),
+    bowerinstall = require('gulp-bower');
 
 var dir = {
     out: path.join(__dirname, './out'),
@@ -25,8 +27,8 @@ gulp.task('default', ['inject', 'build'], function () {
     gutil.log('Building... This might take a while.');
 });
 
-gulp.task('build', function () {
-    gulp.src(dir.assets + '/**')
+gulp.task('build', ['bundle'],  function () {
+    gulp.src(dir.dist + '/**')
         .pipe(plumber())
         .pipe(pgbuild({
             appId: process.env.PG_BUILD_APP_ID,
@@ -39,7 +41,7 @@ gulp.task('build', function () {
         }));
 });
 
-gulp.task('inject', ['copy'], function () {
+gulp.task('inject', ['copy', 'install-deps'], function () {
     var sources = [
         dir.dist + '/lib/**/*.html'
     ];
@@ -79,4 +81,18 @@ gulp.task('serve', ['inject'], function () {
     ).listen(port);
 
     gutil.log('Listening at http://localhost:' + port);
+});
+
+gulp.task('bundle', ['inject'], function () {
+    return gulp.src(dir.dist + '/index.html')
+        .pipe(vulcanize({
+            strip: true,
+            inline: true,
+            dest: dir.dist
+        }))
+        .pipe(gulp.dest(dir.dist));
+});
+
+gulp.task('install-deps', function () {
+    return bowerinstall();
 });

@@ -20,6 +20,7 @@
     "dotenv": "^1.0.0",
     "ecstatic": "^0.6.1",
     "gulp": "^3.8.11",
+    "gulp-bower": "0.0.10",
     "gulp-inject": "^1.2.0",
     "gulp-livereload": "^3.8.0",
     "gulp-phonegap-build": "^0.1.3",
