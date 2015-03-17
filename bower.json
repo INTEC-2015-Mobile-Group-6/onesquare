@@ -25,6 +25,7 @@
     "paper-item": "polymer/paper-item#~0.5.5",
     "core-header-panel": "polymer/core-header-panel#~0.5.5",
     "core-drawer-panel": "polymer/core-drawer-panel#~0.5.5",
-    "paper-tabs": "polymer/paper-tabs#~0.5.5"
+    "paper-tabs": "polymer/paper-tabs#~0.5.5",
+    "core-animated-pages": "polymer/core-animated-pages#~0.5.5"
   }
 }
