@@ -19,6 +19,9 @@
     "webcomponentsjs": "~0.5.5",
     "polymer": "~0.5.5",
     "paper-icon-button": "polymer/paper-icon-button#~0.5.5",
-    "font-roboto": "polymer/font-roboto#~0.5.5"
+    "font-roboto": "polymer/font-roboto#~0.5.5",
+    "paper-menu-button": "polymer/paper-menu-button#~0.5.5",
+    "core-menu": "polymer/core-menu#~0.5.5",
+    "paper-item": "polymer/paper-item#~0.5.5"
   }
 }
