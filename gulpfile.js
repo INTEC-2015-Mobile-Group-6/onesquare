@@ -15,7 +15,8 @@ var gulp = require('gulp'),
     bowerFiles = require('main-bower-files'),
     livereload = require('gulp-livereload'),
     vulcanize = require('gulp-vulcanize'),
-    bowerinstall = require('gulp-bower');
+    bowerinstall = require('gulp-bower'),
+    del = require('del');
 
 var dir = {
     out: path.join(__dirname, './out'),
@@ -23,12 +24,10 @@ var dir = {
     assets: path.join(__dirname, './public'),
 };
 
-gulp.task('default', ['inject', 'build'], function () {
-    gutil.log('Building... This might take a while.');
-});
+gulp.task('default', ['build'], function () {});
 
-gulp.task('build', ['bundle'],  function () {
-    gulp.src(dir.dist + '/**')
+gulp.task('build', ['strip-bundle'],  function () {
+    gulp.src(dir.dist + '/*')
         .pipe(plumber())
         .pipe(pgbuild({
             appId: process.env.PG_BUILD_APP_ID,
@@ -39,26 +38,30 @@ gulp.task('build', ['bundle'],  function () {
                 token: process.env.PG_BUILD_AUTH_TOKEN
             }
         }));
+    
+    gutil.log('APK will be at', gutil.colors.cyan(dir.out), 'directory.');
 });
 
-gulp.task('inject', ['copy', 'install-deps'], function () {
+gulp.task('inject', ['setup'], function () {
     var sources = [
         dir.dist + '/lib/**/*.html'
     ];
 
     return gulp.src(dir.dist + '/index.html')
+        .pipe(plumber())
         .pipe(inject(gulp.src(sources, {read: false}), {relative: true}))
         .pipe(inject(gulp.src(bowerFiles(), {read: false}), {name: 'bower', relative: true}))
         .pipe(gulp.dest(dir.dist))
         .pipe(livereload());
 });
 
-gulp.task('copy', function () {
+gulp.task('setup', ['install-deps'], function () {
     var sources = [
         dir.assets + '/**'
     ];
 
     return gulp.src(sources)
+        .pipe(plumber())
         .pipe(gulp.dest(dir.dist));
 });
 
@@ -85,6 +88,7 @@ gulp.task('serve', ['inject'], function () {
 
 gulp.task('bundle', ['inject'], function () {
     return gulp.src(dir.dist + '/index.html')
+        .pipe(plumber())
         .pipe(vulcanize({
             strip: true,
             inline: true,
@@ -95,4 +99,8 @@ gulp.task('bundle', ['inject'], function () {
 
 gulp.task('install-deps', function () {
     return bowerinstall();
+});
+
+gulp.task('strip-bundle', ['bundle'], function () {
+    del.sync(dir.dist + '/bower_components');
 });
