@@ -16,6 +16,7 @@
     "tests"
   ],
   "dependencies": {
-    "webcomponentsjs": "~0.5.5"
+    "webcomponentsjs": "~0.5.5",
+    "polymer": "~0.5.5"
   }
 }
