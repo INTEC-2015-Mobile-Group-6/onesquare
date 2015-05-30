@@ -1,0 +1,2 @@
+PG_BUILD_APP_ID='your app id'
+PG_BUILD_AUTH_TOKEN='your auth token'

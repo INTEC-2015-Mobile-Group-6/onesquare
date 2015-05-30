@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+    <widget xmlns   = "http://www.w3.org/ns/widgets"
+        xmlns:gap   = "http://phonegap.com/ns/1.0"
+        id          = "com.intec.mobile.onesquare"
+        version     = "0.0.1" >
+
+    <name>OneSquare</name>
+
+    <description>
+        Just another places app.
+    </description>
+
+    <author email="fr.br94@gmail.com">
+        Francis Brito
+    </author>
+
+    <gap:platform name="android" />
+
+</widget>
